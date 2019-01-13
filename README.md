@@ -1,1 +1,1 @@
-# big-data-analytics-for-business
+# Big Data Analytics for Business
