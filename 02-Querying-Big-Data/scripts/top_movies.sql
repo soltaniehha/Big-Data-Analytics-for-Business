@@ -1,6 +1,8 @@
 USE movie_rating;  -- switching the database
 
-CREATE VIEW IF NOT EXISTS top_movies AS
+DROP VIEW IF EXISTS top_movies;
+
+CREATE VIEW top_movies AS
 SELECT movie_id, count(movie_id) number_of_ratings, avg(rating) avg_rating
 FROM ratings
 GROUP BY movie_id
