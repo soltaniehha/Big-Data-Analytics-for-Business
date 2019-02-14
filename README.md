@@ -7,4 +7,4 @@ The course material is constantly being updated. Please make sure you stay up to
 ### Credits
 This repository uses a modified version of the content and several examples from [Spark: The Definitive Guide, 2018](https://learning.oreilly.com/library/view/spark-the-definitive/9781491912201/) by Matei Zaharia, and Bill Chambers.
 
-<img src="https://github.com/soltaniehha/Big-Data-Analytics-for-Business/blob/master/figs/Spark-the-Definitive-Guide.jpg?raw=true" width="350" align="center"/>
+<img src="https://github.com/soltaniehha/Big-Data-Analytics-for-Business/blob/master/figs/Spark-the-Definitive-Guide.jpg?raw=true" align="center" width="350"/>
