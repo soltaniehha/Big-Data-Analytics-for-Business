@@ -26,7 +26,7 @@ gcloud dataproc clusters create bigcluster --project <PROJECT-ID> --bucket <BUCK
 **************************
 ******* SSH Tunnel *******
 **************************
-gcloud compute ssh --zone us-east1-b bigcluster-m -- -L 2222:localhost:8123
+gcloud compute ssh --zone us-east1-b bigcluster-m -- -L 2222:localhost:8123 -L 8088:localhost:8088
 
 ********************************
 ******* JUPYTER NOTEBOOK *******

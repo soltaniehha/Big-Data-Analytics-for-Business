@@ -23,7 +23,7 @@ gcloud dataproc clusters create mycluster --project <PROJECT-ID> --bucket <BUCKE
 **************************
 ******* SSH Tunnel *******
 **************************
-gcloud compute ssh --zone us-east1-b mycluster-m -- -L 2222:localhost:8123
+gcloud compute ssh --zone us-east1-b mycluster-m -- -L 2222:localhost:8123 -L 8088:localhost:8088
 
 ********************************
 ******* JUPYTER NOTEBOOK *******
