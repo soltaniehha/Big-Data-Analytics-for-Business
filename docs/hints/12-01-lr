@@ -1,0 +1,4 @@
+from pyspark.ml.regression import LinearRegression
+
+lr = LinearRegression(maxIter=100, regParam=0.3, elasticNetParam=0.8)
+print(lr.explainParams())
