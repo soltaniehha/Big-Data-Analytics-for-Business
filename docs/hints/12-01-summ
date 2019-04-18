@@ -1,0 +1,7 @@
+print("Coefficients: %s" % str(lrModel.coefficients))
+print("Intercept: %s" % str(lrModel.intercept))
+trainingSummary = lrModel.summary
+print("RMSE: %f" % trainingSummary.rootMeanSquaredError)
+print("r2: %f" % trainingSummary.r2)
+print("numIterations: %d" % trainingSummary.totalIterations)
+print("objectiveHistory: %s" % str(trainingSummary.objectiveHistory))
