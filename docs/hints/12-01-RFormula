@@ -1,0 +1,3 @@
+from pyspark.ml.feature import RFormula
+
+supervised = RFormula(formula="shares ~ . - url")
