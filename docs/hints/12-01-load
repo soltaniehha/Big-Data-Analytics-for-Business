@@ -1,0 +1,10 @@
+df = spark.read.format("csv")\
+  .option("header", "true")\
+  .option("inferSchema", "true")\
+  .load(data + "OnlineNewsPopularity.csv")\
+  .coalesce(5)
+
+df.cache()
+df.show(1)
+df.printSchema()
+print("This datasets consists of {} rows.".format(df.count()))
