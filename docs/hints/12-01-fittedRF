@@ -1,0 +1,1 @@
+fittedRF = supervised.fit(df)  # fit the transformer
