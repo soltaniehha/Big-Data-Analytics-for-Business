@@ -1,6 +1,6 @@
 # Big Data Analytics for Business
 
-Spring 2019
+Spring 2020
 
 This repository consists of course material for IS843, Big Data Analytics for Business. Each week's material can be found under the associated week number.
 
