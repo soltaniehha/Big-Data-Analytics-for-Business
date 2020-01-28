@@ -1,0 +1,6 @@
+gcloud compute --project=<PROJECT-ID> instances create ambari \
+--zone=us-east1-b --machine-type=n1-highmem-2 \
+--subnet=default --network-tier=STANDARD --no-restart-on-failure \
+--maintenance-policy=TERMINATE --image=coreos-stable-1967-3-0-v20190108 \
+--image-project=coreos-cloud --boot-disk-size=60GB \
+--boot-disk-type=pd-standard --boot-disk-device-name=ambari
