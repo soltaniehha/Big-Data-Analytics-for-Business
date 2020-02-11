@@ -1,0 +1,35 @@
+*******************************************
+******* CREATE SINGLE-NODE CLUSTER ********
+*******************************************
+gcloud beta dataproc clusters create mycluster \
+  --project <PROJECT-ID> \
+  --bucket <BUCKET-NAME> \
+  --optional-components=ANACONDA,JUPYTER \
+  --image-version=1.4 \
+  --enable-component-gateway \
+  --region us-east1 \
+  --zone us-east1-b \
+  --single-node \
+  --master-machine-type n1-highmem-2 \
+  --master-boot-disk-size 50
+
+****************************************************
+******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
+****************************************************
+gcloud beta dataproc clusters create mycluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --optional-components=ANACONDA,JUPYTER --image-version=1.4 --enable-component-gateway --region us-east1 --zone us-east1-b --single-node --master-machine-type n1-highmem-2 --master-boot-disk-size 50
+
+**************************
+******* SSH Tunnel *******
+**************************
+gcloud compute ssh mycluster-m --zone us-east1-b -- -L 8080:localhost:8123
+# OR: Select the cluster and under web interfaces select Jupyter or Jupyter Lab.
+
+********************************
+******* JUPYTER NOTEBOOK *******
+********************************
+localhost:8080
+
+*********************************
+******* TERMINATE CLUSTER *******
+*********************************
+gcloud dataproc clusters delete mycluster --region us-east1
