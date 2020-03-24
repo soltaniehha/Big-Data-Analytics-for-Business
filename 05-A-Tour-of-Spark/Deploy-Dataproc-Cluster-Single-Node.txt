@@ -1,22 +1,24 @@
 *******************************************
 ******* CREATE SINGLE-NODE CLUSTER ********
 *******************************************
-gcloud beta dataproc clusters create mycluster \
+gcloud beta dataproc clusters create bigcluster \
   --project <PROJECT-ID> \
   --bucket <BUCKET-NAME> \
-  --optional-components=ANACONDA,JUPYTER \
-  --image-version=1.3 \
-  --enable-component-gateway \
   --region us-east1 \
   --zone us-east1-b \
   --single-node \
   --master-machine-type n1-highmem-2 \
-  --master-boot-disk-size 50
+  --master-boot-disk-size 50 \
+  --optional-components=ANACONDA,JUPYTER \
+  --image-version 1.4-debian9 \
+  --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
+  --metadata 'PIP_PACKAGES=google-cloud-storage' \
+  --enable-component-gateway
 
 ****************************************************
 ******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
 ****************************************************
-gcloud beta dataproc clusters create mycluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --optional-components=ANACONDA,JUPYTER --image-version=1.4 --enable-component-gateway --region us-east1 --zone us-east1-b --single-node --master-machine-type n1-highmem-2 --master-boot-disk-size 50
+gcloud beta dataproc clusters create bigcluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --region us-east1 --zone us-east1-b --single-node --master-machine-type n1-highmem-2 --master-boot-disk-size 50 --optional-components=ANACONDA,JUPYTER --image-version 1.4-debian9 --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
 
 **************************
 ******* SSH Tunnel *******
