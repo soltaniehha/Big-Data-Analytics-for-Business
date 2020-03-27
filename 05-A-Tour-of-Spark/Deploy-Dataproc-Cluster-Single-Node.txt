@@ -1,7 +1,7 @@
 *******************************************
 ******* CREATE SINGLE-NODE CLUSTER ********
 *******************************************
-gcloud beta dataproc clusters create bigcluster \
+gcloud beta dataproc clusters create mycluster \
   --project <PROJECT-ID> \
   --bucket <BUCKET-NAME> \
   --region us-east1 \
