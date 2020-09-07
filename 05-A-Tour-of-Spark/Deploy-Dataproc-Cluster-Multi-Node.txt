@@ -13,7 +13,7 @@ gcloud beta dataproc clusters create bigcluster \
   --worker-boot-disk-size 50 \
   --num-secondary-workers 0 \
   --optional-components=ANACONDA,JUPYTER \
-  --image-version 1.4-debian9 \
+  --image-version preview-debian10 \
   --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
   --metadata 'PIP_PACKAGES=google-cloud-storage' \
   --enable-component-gateway
@@ -21,7 +21,7 @@ gcloud beta dataproc clusters create bigcluster \
 ****************************************************
 ******* CREATE MULTI-NODE CLUSTER ONE-LINER ********
 ****************************************************
-gcloud beta dataproc clusters create bigcluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --region us-east1 --zone us-east1-b --master-machine-type n1-highmem-2 --master-boot-disk-size 50 --num-workers 2 --worker-machine-type n1-highmem-2 --worker-boot-disk-size 50 --num-secondary-workers 0 --optional-components=ANACONDA,JUPYTER --image-version 1.4-debian9 --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
+gcloud beta dataproc clusters create bigcluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --region us-east1 --zone us-east1-b --master-machine-type n1-highmem-2 --master-boot-disk-size 50 --num-workers 2 --worker-machine-type n1-highmem-2 --worker-boot-disk-size 50 --num-secondary-workers 0 --optional-components=ANACONDA,JUPYTER --image-version preview-debian10 --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
 
 **************************
 ******* SSH Tunnel *******
