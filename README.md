@@ -1,11 +1,9 @@
 # Big Data Analytics for Business
 
-Spring 2021
-
 This repository consists of course material for IS843, Big Data Analytics for Business. Each week's material can be found under the associated week number.
 
 This repository can be accessed via this short link:
-### [bit.ly/IS843](http://bit.ly/IS843)
+### [bit.ly/BU-QST843](https://bit.ly/BU-QST843)
 
 The course material is constantly being updated. Please make sure you stay up to date. One way would be to frequently download the latest version by clicking on the "clone or download" button above. Optionally, you can also install git on your laptop and update it with `git pull` as semester progresses. If you would like to get started with git here is a place to get you started: http://rogerdudler.github.io/git-guide/
 
