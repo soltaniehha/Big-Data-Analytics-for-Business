@@ -2,5 +2,5 @@ gcloud compute --project=<PROJECT-ID> instances create ambari \
 --zone=us-east1-b --machine-type=e2-standard-8 \
 --subnet=default --network-tier=PREMIUM --no-restart-on-failure \
 --maintenance-policy=MIGRATE --image=cos-77-12371-1109-0 \
---image-project=cos-cloud --boot-disk-size=100GB \
---boot-disk-type=pd-ssd --boot-disk-device-name=ambari
+--image-project=cos-cloud --boot-disk-size=50GB \
+--boot-disk-type=pd-balanced --boot-disk-device-name=ambari
