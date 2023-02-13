@@ -1,0 +1,38 @@
+*******************************************
+******* CREATE SINGLE-NODE CLUSTER ********
+*******************************************
+gcloud beta dataproc clusters create mycluster \
+  --project <PROJECT-ID> \
+  --bucket <BUCKET-NAME> \
+  --region us-east1 \
+  --zone us-east1-b \
+  --single-node \
+  --master-machine-type e2-highmem-4 \
+  --master-boot-disk-size 50 \
+  --optional-components=JUPYTER \
+  --image-version 2.0-debian10 \
+  --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
+  --metadata 'PIP_PACKAGES=google-cloud-storage' \
+  --enable-component-gateway
+
+****************************************************
+******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
+****************************************************
+gcloud beta dataproc clusters create mycluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --region us-east1 --zone us-east1-b --single-node --master-machine-type e2-highmem-4 --master-boot-disk-size 50 --optional-components=JUPYTER --image-version 2.0-debian10 --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
+
+**************************
+******* SSH Tunnel *******
+**************************
+Select the cluster and under web interfaces select Jupyter or Jupyter Lab.
+OR
+gcloud compute ssh mycluster-m --zone us-east1-b -- -L 8080:localhost:8123
+
+********************************
+******* JUPYTER NOTEBOOK *******
+********************************
+localhost:8080
+
+*********************************
+******* TERMINATE CLUSTER *******
+*********************************
+gcloud dataproc clusters delete mycluster --region us-east1
