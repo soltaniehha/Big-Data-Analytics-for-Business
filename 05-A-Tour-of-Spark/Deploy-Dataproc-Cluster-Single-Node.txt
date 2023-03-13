@@ -1,7 +1,7 @@
 *******************************************
 ******* CREATE SINGLE-NODE CLUSTER ********
 *******************************************
-gcloud beta dataproc clusters create mycluster \
+gcloud dataproc clusters create myspark33 \
   --project <PROJECT-ID> \
   --bucket <BUCKET-NAME> \
   --region us-east1 \
@@ -10,22 +10,24 @@ gcloud beta dataproc clusters create mycluster \
   --master-machine-type e2-highmem-4 \
   --master-boot-disk-size 50 \
   --optional-components=JUPYTER \
-  --image-version 2.0-debian10 \
+  --image-version 2.1-debian11 \
   --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
   --metadata 'PIP_PACKAGES=google-cloud-storage' \
   --enable-component-gateway
 
+--image-version 2.1-debian11 --project is843-demo
+
 ****************************************************
 ******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
 ****************************************************
-gcloud beta dataproc clusters create mycluster --project <PROJECT-ID> --bucket <BUCKET-NAME> --region us-east1 --zone us-east1-b --single-node --master-machine-type e2-highmem-4 --master-boot-disk-size 50 --optional-components=JUPYTER --image-version 2.0-debian10 --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
+gcloud dataproc clusters create myspark33 --project <PROJECT-ID> --bucket <BUCKET-NAME> --region us-east1 --zone us-east1-b --single-node --master-machine-type e2-highmem-4 --master-boot-disk-size 50 --optional-components=JUPYTER --image-version 2.1-debian11 --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
 
 **************************
 ******* SSH Tunnel *******
 **************************
 Select the cluster and under web interfaces select Jupyter or Jupyter Lab.
 OR
-gcloud compute ssh mycluster-m --zone us-east1-b -- -L 8080:localhost:8123
+gcloud compute ssh myspark33-m --zone us-east1-b -- -L 8080:localhost:8123
 
 ********************************
 ******* JUPYTER NOTEBOOK *******
@@ -35,4 +37,4 @@ localhost:8080
 *********************************
 ******* TERMINATE CLUSTER *******
 *********************************
-gcloud dataproc clusters delete mycluster --region us-east1
+gcloud dataproc clusters delete myspark33 --region us-east1
