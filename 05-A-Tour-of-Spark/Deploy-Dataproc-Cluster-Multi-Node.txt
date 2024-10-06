@@ -1,7 +1,7 @@
 ******************************************
 ******* CREATE MULTI-NODE CLUSTER ********
 ******************************************
-gcloud dataproc clusters create multi-spark351 \
+gcloud dataproc clusters create multi-spark332 \
   --bucket <BUCKET-NAME> \
   --region us-central1 \
   --master-machine-type n2-highmem-4 \
@@ -12,9 +12,8 @@ gcloud dataproc clusters create multi-spark351 \
   --secondary-worker-type spot \
   --num-secondary-workers 4 \
   --secondary-worker-boot-disk-size 30 --num-secondary-worker-local-ssds 0 \
-  --image-version 2.2-debian12 \
+  --image-version 2.1-debian11 \
   --no-address \
-  --properties spark:spark.dataproc.enhanced.optimizer.enabled=true,spark:spark.dataproc.enhanced.execution.enabled=true \
   --optional-components JUPYTER \
   --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
   --metadata 'PIP_PACKAGES=google-cloud-storage' \
@@ -23,14 +22,14 @@ gcloud dataproc clusters create multi-spark351 \
 ****************************************************
 ******* CREATE MULTI-NODE CLUSTER ONE-LINER ********
 ****************************************************
-gcloud dataproc clusters create multi-spark351 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --num-workers 2 --worker-machine-type n2-highmem-2 --worker-boot-disk-type pd-balanced --worker-boot-disk-size 30 --secondary-worker-type spot --num-secondary-workers 4 --secondary-worker-boot-disk-size 30 --num-secondary-worker-local-ssds 0 --image-version 2.2-debian12 --no-address --properties spark:spark.dataproc.enhanced.optimizer.enabled=true,spark:spark.dataproc.enhanced.execution.enabled=true --optional-components JUPYTER --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
+gcloud dataproc clusters create multi-spark332 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --num-workers 2 --worker-machine-type n2-highmem-2 --worker-boot-disk-type pd-balanced --worker-boot-disk-size 30 --secondary-worker-type spot --num-secondary-workers 4 --secondary-worker-boot-disk-size 30 --num-secondary-worker-local-ssds 0 --image-version 2.1-debian11 --no-address --optional-components JUPYTER --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
 
 **************************
 ******* SSH Tunnel *******
 **************************
 Select the cluster and under web interfaces select Jupyter or Jupyter Lab.
 OR
-gcloud compute ssh multi-spark351-m --zone us-central1-b -- -L 8080:localhost:8123
+gcloud compute ssh multi-spark332-m --zone us-central1-b -- -L 8080:localhost:8123
 
 ********************************
 ******* JUPYTER NOTEBOOK *******
@@ -40,4 +39,4 @@ localhost:8080
 *********************************
 ******* TERMINATE CLUSTER *******
 *********************************
-gcloud dataproc clusters delete multi-spark351 --region us-central1
+gcloud dataproc clusters delete multi-spark332 --region us-central1

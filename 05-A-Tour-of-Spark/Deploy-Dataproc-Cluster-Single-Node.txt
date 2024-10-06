@@ -1,7 +1,7 @@
 *******************************************
 ******* CREATE SINGLE-NODE CLUSTER ********
 *******************************************
-gcloud dataproc clusters create single-spark351 \
+gcloud dataproc clusters create single-spark332 \
   --bucket <BUCKET-NAME> \
   --region us-central1 \
   --master-machine-type n2-highmem-4 \
@@ -9,7 +9,7 @@ gcloud dataproc clusters create single-spark351 \
   --master-boot-disk-size 30 \
   --single-node \
   --no-address \
-  --image-version 2.2-debian12 \
+  --image-version 2.1-debian11 \
   --properties spark:spark.dataproc.enhanced.optimizer.enabled=true,spark:spark.dataproc.enhanced.execution.enabled=true \
   --optional-components JUPYTER \
   --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
@@ -19,14 +19,14 @@ gcloud dataproc clusters create single-spark351 \
 ****************************************************
 ******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
 ****************************************************
-gcloud dataproc clusters create single-spark351 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --single-node --no-address --image-version 2.2-debian12 --properties spark:spark.dataproc.enhanced.optimizer.enabled=true,spark:spark.dataproc.enhanced.execution.enabled=true --optional-components JUPYTER --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway 
+gcloud dataproc clusters create single-spark332 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --single-node --no-address --image-version 2.1-debian11 --optional-components JUPYTER --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway 
 
 **************************
 ******* SSH Tunnel *******
 **************************
 Select the cluster and under web interfaces select Jupyter or Jupyter Lab.
 OR
-gcloud compute ssh single-spark351-m --zone us-central1-X -- -L 8080:localhost:8123
+gcloud compute ssh single-spark332-m --zone us-central1-X -- -L 8080:localhost:8123
 
 Replace X with the actual assigned zone.
 
@@ -38,4 +38,4 @@ localhost:8080
 *********************************
 ******* TERMINATE CLUSTER *******
 *********************************
-gcloud dataproc clusters delete single-spark351 --region us-central1
+gcloud dataproc clusters delete single-spark332 --region us-central1
