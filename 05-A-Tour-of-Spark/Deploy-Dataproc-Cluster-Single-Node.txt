@@ -10,7 +10,6 @@ gcloud dataproc clusters create single-spark332 \
   --single-node \
   --no-address \
   --image-version 2.1-debian11 \
-  --properties spark:spark.dataproc.enhanced.optimizer.enabled=true,spark:spark.dataproc.enhanced.execution.enabled=true \
   --optional-components JUPYTER \
   --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh \
   --metadata 'PIP_PACKAGES=google-cloud-storage' \
@@ -19,7 +18,7 @@ gcloud dataproc clusters create single-spark332 \
 ****************************************************
 ******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
 ****************************************************
-gcloud dataproc clusters create single-spark332 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --single-node --no-address --image-version 2.1-debian11 --optional-components JUPYTER --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway 
+gcloud dataproc clusters create single-spark332 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --single-node --no-address --image-version 2.1-debian11 --optional-components JUPYTER --initialization-actions gs://dataproc-initialization-actions/python/pip-install.sh --metadata 'PIP_PACKAGES=google-cloud-storage' --enable-component-gateway
 
 **************************
 ******* SSH Tunnel *******
