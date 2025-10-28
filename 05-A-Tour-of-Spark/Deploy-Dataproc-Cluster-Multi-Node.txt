@@ -10,7 +10,7 @@ gcloud dataproc clusters create multi-spark353 \
   --worker-machine-type n4-highmem-2 \
   --worker-boot-disk-type pd-standard --worker-boot-disk-size 30 \
   --secondary-worker-type spot \
-  --num-secondary-workers 4 \
+  --num-secondary-workers 2 \
   --secondary-worker-boot-disk-size 30 --num-secondary-worker-local-ssds 0 \
   --image-version 2.2-debian12 \
   --no-address \
