@@ -4,7 +4,7 @@
 gcloud dataproc clusters create single-spark353 \
   --bucket <BUCKET-NAME> \
   --region us-central1 \
-  --master-machine-type n4-highmem-4 \
+  --master-machine-type n2-highmem-4 \
   --master-boot-disk-type pd-standard \
   --master-boot-disk-size 30 \
   --single-node \
