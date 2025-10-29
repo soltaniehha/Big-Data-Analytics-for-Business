@@ -4,11 +4,11 @@
 gcloud dataproc clusters create multi-spark353 \
   --bucket <BUCKET-NAME> \
   --region us-central1 \
-  --master-machine-type n2-highmem-2 \
-  --master-boot-disk-type pd-standard --master-boot-disk-size 30 \
-  --num-workers 2 \
-  --worker-machine-type n2-highmem-2 \
-  --worker-boot-disk-type pd-standard --worker-boot-disk-size 30 \
+  --master-machine-type c3-highmem-4 \
+  --master-boot-disk-type pd-balanced --master-boot-disk-size 30 \
+  --num-workers 4 \
+  --worker-machine-type c3-highmem-4 \
+  --worker-boot-disk-type pd-balanced --worker-boot-disk-size 30 \
   --secondary-worker-type spot \
   --num-secondary-workers 0 \
   --secondary-worker-boot-disk-size 30 --num-secondary-worker-local-ssds 0 \
