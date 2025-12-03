@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flight-analysis-local-llm
+spec:
+  ttlSecondsAfterFinished: 600  # Cleanup 10 minutes after completion
+  template:
+    metadata:
+      labels:
+        app: flight-analysis-local-llm
+    spec:
+      serviceAccountName: flight-analysis-sa
+      restartPolicy: Never
+      containers:
+      - name: llm-analysis
+        image: us-central1-docker.pkg.dev/GOOGLE_PROJECT_ID_HERE/llm-app-repo/flight-analysis-local:v1
+        env:
+        - name: MODEL_NAME
+          value: "meta-llama/Llama-3.2-1B-Instruct"
+        - name: MAX_TOKENS
+          value: "250"
+        - name: HUGGINGFACE_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: huggingface-token
+              key: token
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2000m"
+          limits:
+            memory: "8Gi"
+            cpu: "4000m"
