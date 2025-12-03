@@ -21,6 +21,10 @@ RUN pip install --no-cache-dir transformers huggingface-hub pandas gcsfs
 # Copy application code
 COPY app.py .
 
+# Copy the 2015 summary CSV into the image
+# (Make sure the CSV is in the same directory as the Dockerfile)
+COPY 2015-summary.csv .
+
 # Set environment variable for Hugging Face cache
 ENV HF_HOME=/app/.cache/huggingface
 
