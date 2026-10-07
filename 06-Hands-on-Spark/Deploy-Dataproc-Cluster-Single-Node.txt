@@ -1,0 +1,77 @@
+*************************************************
+************ ONE-TIME: ENABLE APIS **************
+*************************************************
+Run once per new project, in Cloud Shell. If a gcloud command later asks
+to enable an API, answer y.
+
+gcloud services enable compute.googleapis.com dataproc.googleapis.com
+
+*************************************************
+******* ONE-TIME: SERVICE ACCOUNT ACCESS ********
+*************************************************
+Run once per project, before your first cluster. Fixes "Permissions are missing
+for the default service account ... storage.buckets.get ..." on cluster create.
+
+PROJECT_ID=$(gcloud config get-value project)
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
+  --role="roles/dataproc.worker"
+
+*******************************************
+******* CREATE SINGLE-NODE CLUSTER ********
+*******************************************
+gcloud dataproc clusters create single-spark353 \
+  --bucket <BUCKET-NAME> \
+  --region us-central1 \
+  --master-machine-type n2-highmem-4 \
+  --master-boot-disk-type pd-balanced \
+  --master-boot-disk-size 30 \
+  --single-node \
+  --no-address \
+  --image-version 2.3-debian12 \
+  --optional-components JUPYTER \
+  --enable-component-gateway \
+  --stop-max-idle 30m
+
+****************************************************
+******* CREATE SINGLE-NODE CLUSTER ONE-LINER *******
+****************************************************
+gcloud dataproc clusters create single-spark353 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type n2-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --single-node --no-address --image-version 2.3-debian12 --optional-components JUPYTER --enable-component-gateway --stop-max-idle 30m
+
+**************************
+******* JUPYTERLAB *******
+**************************
+Recommended: Dataproc page > select the cluster > WEB INTERFACES > JupyterLab.
+
+OR, through an SSH tunnel (the cluster has no external IP, so the tunnel goes through IAP):
+
+gcloud dataproc clusters describe single-spark353 --region us-central1 --format="value(config.gceClusterConfig.zoneUri)"
+gcloud compute ssh single-spark353-m --zone us-central1-X --tunnel-through-iap -- -N -L 8123:localhost:8123
+
+Replace X with the zone printed by the first command (last part of the URL).
+Then open: http://localhost:8123/gateway/default/jupyter/lab
+
+*******************************************************
+******* GET / UPDATE THE COURSE MATERIALS *************
+*******************************************************
+In JupyterLab: File > New > Terminal, then run (same line the first time and every update):
+
+curl -sL https://raw.githubusercontent.com/soltaniehha/Big-Data-Analytics-for-Business/master/06-Hands-on-Spark/update-course.sh | bash
+
+It copies the course into gs://<BUCKET-NAME>/notebooks/jupyter/Big-Data-Analytics-for-Business/
+(the GCS folder in JupyterLab). Files you changed are never overwritten; if the course
+also changed one, the new version is saved next to yours as <name>-updated.ipynb.
+
+*****************************
+******* STOP / RESTART ******
+*****************************
+gcloud dataproc clusters stop single-spark353 --region us-central1
+gcloud dataproc clusters start single-spark353 --region us-central1
+
+(--stop-max-idle 30m also stops the cluster automatically after 30 idle minutes.)
+
+*********************************
+******* TERMINATE CLUSTER *******
+*********************************
+gcloud dataproc clusters delete single-spark353 --region us-central1

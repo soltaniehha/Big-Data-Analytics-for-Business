@@ -1,0 +1,82 @@
+*************************************************
+************ ONE-TIME: ENABLE APIS **************
+*************************************************
+Run once per new project, in Cloud Shell. If a gcloud command later asks
+to enable an API, answer y.
+
+gcloud services enable compute.googleapis.com dataproc.googleapis.com
+
+*************************************************
+******* ONE-TIME: SERVICE ACCOUNT ACCESS ********
+*************************************************
+Run once per project, before your first cluster. Fixes "Permissions are missing
+for the default service account ... storage.buckets.get ..." on cluster create.
+
+PROJECT_ID=$(gcloud config get-value project)
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
+  --role="roles/dataproc.worker"
+
+******************************************
+******* CREATE MULTI-NODE CLUSTER ********
+******************************************
+gcloud dataproc clusters create multi-spark353 \
+  --bucket <BUCKET-NAME> \
+  --region us-central1 \
+  --master-machine-type c3-highmem-4 \
+  --master-boot-disk-type pd-balanced --master-boot-disk-size 30 \
+  --num-workers 4 \
+  --worker-machine-type c3-highmem-4 \
+  --worker-boot-disk-type pd-balanced --worker-boot-disk-size 30 \
+  --image-version 2.3-debian12 \
+  --no-address \
+  --optional-components JUPYTER \
+  --enable-component-gateway \
+  --stop-max-idle 2h
+
+****************************************************
+******* CREATE MULTI-NODE CLUSTER ONE-LINER ********
+****************************************************
+gcloud dataproc clusters create multi-spark353 --bucket <BUCKET-NAME> --region us-central1 --master-machine-type c3-highmem-4 --master-boot-disk-type pd-balanced --master-boot-disk-size 30 --num-workers 4 --worker-machine-type c3-highmem-4 --worker-boot-disk-type pd-balanced --worker-boot-disk-size 30 --image-version 2.3-debian12 --no-address --optional-components JUPYTER --enable-component-gateway --stop-max-idle 2h
+
+Needs 20 C3 vCPUs of quota in us-central1 (IAM & Admin > Quotas).
+
+To add Spot secondary workers (cheaper, but they can be reclaimed at any time,
+and a cluster with secondary workers can no longer be stopped, only deleted):
+  --secondary-worker-type spot --num-secondary-workers 2 --secondary-worker-boot-disk-size 30
+
+**************************
+******* JUPYTERLAB *******
+**************************
+Recommended: Dataproc page > select the cluster > WEB INTERFACES > JupyterLab.
+
+OR, through an SSH tunnel (the cluster has no external IP, so the tunnel goes through IAP):
+
+gcloud dataproc clusters describe multi-spark353 --region us-central1 --format="value(config.gceClusterConfig.zoneUri)"
+gcloud compute ssh multi-spark353-m --zone us-central1-X --tunnel-through-iap -- -N -L 8123:localhost:8123
+
+Replace X with the zone printed by the first command (last part of the URL).
+Then open: http://localhost:8123/gateway/default/jupyter/lab
+
+*******************************************************
+******* GET / UPDATE THE COURSE MATERIALS *************
+*******************************************************
+In JupyterLab: File > New > Terminal, then run (same line the first time and every update):
+
+curl -sL https://raw.githubusercontent.com/soltaniehha/Big-Data-Analytics-for-Business/master/06-Hands-on-Spark/update-course.sh | bash
+
+It copies the course into gs://<BUCKET-NAME>/notebooks/jupyter/Big-Data-Analytics-for-Business/
+(the GCS folder in JupyterLab). Files you changed are never overwritten; if the course
+also changed one, the new version is saved next to yours as <name>-updated.ipynb.
+
+*****************************
+******* STOP / RESTART ******
+*****************************
+gcloud dataproc clusters stop multi-spark353 --region us-central1
+gcloud dataproc clusters start multi-spark353 --region us-central1
+
+*********************************
+******* TERMINATE CLUSTER *******
+*********************************
+gcloud dataproc clusters delete multi-spark353 --region us-central1
