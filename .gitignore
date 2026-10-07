@@ -110,3 +110,5 @@ venv.bak/
 *.swp
 *KEY*
 materials
+03-Querying-Big-Data/data-detective-qst843.txt
+05-A-Tour-of-Spark/Case-Study-Intr-ai-only-client-brief.md
