@@ -1,0 +1,34 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:11434",
+    "ANTHROPIC_AUTH_TOKEN": "ollama",
+    "ANTHROPIC_API_KEY": "",
+    "CLAUDE_CODE_MAX_CONTEXT_TOKENS": "131072",
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "8192"
+  },
+  "permissions": {
+    "defaultMode": "default",
+    "blockReadsOutsideWorkingDirectories": true,
+    "deny": [
+      "Bash(gcloud projects delete *)",
+      "Bash(gcloud dataproc clusters delete *)",
+      "Bash(gcloud storage rm *)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": false,
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "allowWrite": [
+        "~/.config/gcloud"
+      ]
+    },
+    "network": {
+      "allowedDomains": [
+        "*.googleapis.com",
+        "accounts.google.com"
+      ]
+    }
+  }
+}
