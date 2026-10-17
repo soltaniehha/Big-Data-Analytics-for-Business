@@ -1,0 +1,6 @@
+from pyspark.sql.functions import regexp_extract
+
+extract_str = r'\((\d{4})\)$'
+
+movies = movies.withColumn("year", regexp_extract(col("title"), extract_str, 1))
+movies.show(5)

@@ -1,0 +1,4 @@
+spark.sql("""
+SELECT * FROM movies
+LIMIT 5
+""").show()

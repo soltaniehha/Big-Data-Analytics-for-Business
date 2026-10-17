@@ -1,0 +1,10 @@
+from pyspark.sql.window import Window
+from pyspark.sql.functions import row_number
+
+byYear = Window.partitionBy("year").orderBy(desc("avg_rating"))
+
+popular_movies.withColumn("rn", row_number().over(byYear))\
+  .where("rn = 1 AND year >= 1990")\
+  .select("year", "title", round("avg_rating", 2).alias("avg_rating"), "total_ratings")\
+  .orderBy("year")\
+  .show(truncate=False)

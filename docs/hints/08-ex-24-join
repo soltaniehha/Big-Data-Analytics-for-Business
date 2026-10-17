@@ -1,0 +1,4 @@
+from pyspark.sql.functions import broadcast
+
+popular_movies = ratings_agg.join(broadcast(movies), "movie_id", how="inner")
+popular_movies.show(5)

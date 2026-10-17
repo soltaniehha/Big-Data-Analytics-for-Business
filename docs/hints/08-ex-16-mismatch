@@ -1,0 +1,3 @@
+mismatches = movies.where("year != release_year")
+print(mismatches.count())
+mismatches.show(10, False)

@@ -1,0 +1,1 @@
+movies = movies.withColumnRenamed("movie_title", "title")

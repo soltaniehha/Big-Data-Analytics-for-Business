@@ -1,0 +1,1 @@
+movies.sample(withReplacement=False, fraction=0.01, seed=8).select("movie_title").show(20, False)

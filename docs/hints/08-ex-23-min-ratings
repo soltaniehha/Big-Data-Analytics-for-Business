@@ -1,0 +1,2 @@
+ratings_agg = ratings_agg.where("total_ratings >= 100")
+ratings_agg.count()

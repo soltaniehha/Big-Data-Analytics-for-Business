@@ -1,0 +1,4 @@
+extract_str = r'(\d{4})'
+
+movies = movies.withColumn("release_year", regexp_extract(col("release_date"), extract_str, 1))
+movies.show(5)

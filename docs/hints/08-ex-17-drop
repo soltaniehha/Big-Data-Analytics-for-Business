@@ -1,0 +1,2 @@
+movies = movies.drop("release_date", "release_year")
+movies.show(5)

@@ -1,0 +1,1 @@
+movies = movies_all.select("movie_id", "movie_title", "release_date")

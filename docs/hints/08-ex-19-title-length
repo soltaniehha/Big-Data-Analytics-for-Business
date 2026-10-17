@@ -1,0 +1,4 @@
+from pyspark.sql.functions import length
+
+movies = movies.withColumn("title_length", length(col("title")) - 7)
+movies.show(5)

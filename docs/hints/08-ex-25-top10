@@ -1,0 +1,5 @@
+from pyspark.sql.functions import round
+
+popular_movies.select("title", "year", round(col("avg_rating"), 2).alias("avg_rating"), "total_ratings")\
+  .orderBy(desc("avg_rating"))\
+  .show(10, False)

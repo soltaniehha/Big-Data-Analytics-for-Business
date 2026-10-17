@@ -1,0 +1,5 @@
+movies = movies.where("year != ''")\
+  .withColumn("year", col("year").cast("int"))
+
+movies.printSchema()
+movies.count()

@@ -1,0 +1,7 @@
+from pyspark.sql.functions import avg, count
+
+ratings_agg = ratings.groupBy("movie_id")\
+  .agg(avg("rating").alias("avg_rating"),
+       count("rating").alias("total_ratings"))
+
+ratings_agg.show(5)

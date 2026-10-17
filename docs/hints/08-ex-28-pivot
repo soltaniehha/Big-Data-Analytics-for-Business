@@ -1,0 +1,8 @@
+top5 = ratings_agg.orderBy(desc("total_ratings")).limit(5)
+
+ratings.join(top5, "movie_id", how="left_semi")\
+  .join(movies.select("movie_id", "title"), "movie_id")\
+  .groupBy("title")\
+  .pivot("rating", [1, 2, 3, 4, 5])\
+  .count()\
+  .show(truncate=False)

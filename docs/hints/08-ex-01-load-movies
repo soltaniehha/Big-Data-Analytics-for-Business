@@ -1,0 +1,6 @@
+movies_all = spark.read.format("csv")\
+  .option("delimiter", "|")\
+  .option("encoding", "ISO-8859-1")\
+  .option("header", "true")\
+  .option("inferSchema", "true")\
+  .load(movie_data + "movies.csv")

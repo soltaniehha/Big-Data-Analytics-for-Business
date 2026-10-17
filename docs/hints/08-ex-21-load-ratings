@@ -1,0 +1,5 @@
+ratings = spark.read.format("csv")\
+  .option("delimiter", "\t")\
+  .option("header", "true")\
+  .option("inferSchema", "true")\
+  .load(movie_data + "ratings.csv")
