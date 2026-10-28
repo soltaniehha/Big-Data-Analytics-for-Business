@@ -42,7 +42,7 @@ gcloud dataproc clusters create single-spark353 --bucket <BUCKET-NAME> --region 
 **************************
 ******* JUPYTERLAB *******
 **************************
-Recommended: Dataproc page > select the cluster > WEB INTERFACES > JupyterLab.
+Recommended: Dataproc page > select the cluster > Profile tab > scroll to the bottom ("Cluster web interfaces") > JupyterLab.
 
 OR, through an SSH tunnel (the cluster has no external IP, so the tunnel goes through IAP):
 
